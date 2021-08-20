@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./pages/index.css">
+  <title>Место</title>
+</head>
+<body>
+  <div class="page">
+    <header class="header">
+      <img src="./images/logo.svg" alt="логотип" class="header__logo">
+    </header>
+
+    <main class="content">
+      <section class="profile">
+        <div class="profile__space">
+          <img src="./images/image.png" alt="фото профиля" class="profile__avatar">
+          <div class="profile__info">
+            <h2 class="profile__title">Жак-Ив Кусто</h2>
+            <div class="profile__edit-button"></div>
+            <p class="profile__subtitle">Исследователь океана</p></div>
+        </div>
+        <div class="profile__add-button"></div>
+      </section>
+
+      <section>
+        <ul class="elements">
+          <li class="elements__element">
+            <img src="./images/kirill-pershin-1088404-unsplash.png" alt="" class="elements__image">
+            <div class="elements__description"><p class="elements__text">Карачаевск</p><div class="elements__group"></div></div>
+          </li>
+          <li class="elements__element">
+            <img src="./images/kirill-pershin-1404681-unsplash.png" alt="" class="elements__image">
+            <div class="elements__description"><p class="elements__text">Гора Эльбрус</p><div class="elements__group"></div></div>
+          </li>
+          <li class="elements__element">
+            <img src="./images/kirill-pershin-1556355-unsplash.png" alt="" class="elements__image">
+            <div class="elements__description"><p class="elements__text">Домбай</p><div class="elements__group"></div></div>
+          </li>
+          <li class="elements__element">
+            <img src="./images/kirill-pershin-1404681-unsplash.png" alt="" class="elements__image">
+            <div class="elements__description"><p class="elements__text">Гора Эльбрус</p><div class="elements__group"></div></div>
+          </li>
+          <li class="elements__element">
+            <img src="./images/kirill-pershin-1556355-unsplash.png" alt="" class="elements__image">
+            <div class="elements__description"><p class="elements__text">Домбай</p><div class="elements__group"></div></div>
+          </li>
+          <li class="elements__element">
+            <img src="./images/kirill-pershin-1088404-unsplash.png" alt="" class="elements__image">
+            <div class="elements__description"><p class="elements__text">Карачаево-Черкеcсия</p><div class="elements__group"></div></div>
+          </li>
+        </ul>
+      </section>
+
+      <section class="popup">
+          <div class="popup__container">
+            <img src="./images/Close Icon.svg" class="popup__icon">
+            <form class="popup__form">
+              <h2 class="popup__title">Редактировать профиль</h2>
+              <input type="text" color="black" placeholder="Ваше имя" id='input_name' class="popup__input popup__input_name" value="">
+              <input type="text" placeholder="Род занятий" id='input_job' class="popup__input popup__input_job" value="">
+              <div class="popup__submit-button"><p class="popup__submit">Сохранить</p></div>
+            </form>
+          </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p class="footer__copyright">&copy;2021 Mesto Russia</p>
+    </footer>
+  </div>
+  <script>
+    let popup = document.querySelector('.popup');
+    let openPopupButton = document.querySelector('.profile__edit-button');
+    function openPopup () {
+      popup.setAttribute('class', 'popup popup_opened');
+    };
+    openPopupButton.addEventListener('click', openPopup);
+
+    let name = document.querySelector('.profile__title');
+    let nameText = name.textContent;
+    let nameField = document.getElementById('input_name');
+    nameField.setAttribute('value', nameText);
+
+    let job = document.querySelector('.profile__subtitle');
+    let jobText = job.textContent;
+    let jobField = document.getElementById('input_job');
+    jobField.setAttribute('value', jobText);
+
+    let closePopupButton = document.querySelector('.popup__icon');
+    function closePopup () {
+       popup.setAttribute('class', 'popup');
+       nameField.value = name.textContent;
+       jobField.value = job.textContent;
+     };
+    closePopupButton.addEventListener('click', closePopup);
+
+    let submitButton = document.querySelector('.popup__submit-button');
+    function updateInfo () {
+      let newName = nameField.value;
+      name.textContent = newName;
+      let newJob = jobField.value;
+      job.textContent = newJob;
+      popup.setAttribute('class', 'popup');
+    };
+    submitButton.addEventListener('click', updateInfo);
+  </script>
+</body>
+</html>

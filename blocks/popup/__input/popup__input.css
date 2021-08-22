@@ -2,19 +2,28 @@
   margin: 0 0 30px 36px;
   width: 354px;
   height: 27px;
-  opacity: 0.2;
-  border-bottom: 1px solid #000000;
+  border-bottom: 1px solid rgba(0,0,0,0.2);
   border-top: none;
   border-left: none;
   border-right: none;
-  font-family: Inter;
-font-style: normal;
-font-weight: normal;
-font-size: 14px;
-line-height: 17px;
-color: #000000;
+  font-family: "Inter", "Arial", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  color: #000000;
 }
 
 .popup__input:nth-of-type(2) {
   margin: 0 0 0 36px;
+}
+
+@media screen and (max-width: 320px){
+  .popup__input {
+    width: 238px;
+    margin: 0 22px 0;
+  }
+  .popup__input:nth-of-type(2) {
+    margin: 30px 22px 0;
+  }
 }

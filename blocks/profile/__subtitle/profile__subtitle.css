@@ -2,12 +2,12 @@
   margin: 0;
   padding: 0;
   padding-top: 16px;
-  font-family: Inter;
-font-style: normal;
-font-weight: normal;
-font-size: 18px;
-line-height: 22px;
-color: #FFFFFF;
+  font-family: "Inter", "Arial", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 22px;
+  color: #FFFFFF;
 }
 
 @media screen and (max-width: 320px){

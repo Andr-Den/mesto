@@ -9,7 +9,7 @@
   justify-content: flex-start;
 }
 
-@media screen and (max-width: 320px){
+@media screen and (max-width: 540px){
   .popup__form {
     width: 282px;
   }

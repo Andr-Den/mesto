@@ -1,0 +1,19 @@
+.elements__group {
+  margin-top: 6px;
+  padding-left: 10px;
+  background-image: url(../../../images/Vector.svg);
+  background-repeat: no-repeat;
+  width: 22px;
+  height: 19px;
+  opacity: 1;
+  background-color: #ffffff;
+}
+
+.elements__group:hover {
+  opacity: .5;
+}
+
+.elements__group:active {
+  background-image: url(../../../images/Union.svg);
+  opacity: 1;
+}

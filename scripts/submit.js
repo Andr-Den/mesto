@@ -9,17 +9,16 @@ let jobComponent = document.querySelector('.profile__subtitle');
 let jobText = jobComponent.textContent;
 let jobField = document.getElementById('input_job');
 
-nameField.setAttribute('value', nameText);
-jobField.setAttribute('value', jobText);
-
 function openPopup () {
-  popup.setAttribute('class', 'popup popup_opened');
+  nameField.setAttribute('value', nameText);
+  jobField.setAttribute('value', jobText);
+  popup.classList.add('popup_opened');
 };
 openPopupButton.addEventListener('click', openPopup);
 
 let closePopupButton = document.querySelector('.popup__icon');
 function closePopup () {
-  popup.setAttribute('class', 'popup');
+  popup.classList.remove('popup_opened');
 };
 closePopupButton.addEventListener('click', closePopup);
 
@@ -30,6 +29,6 @@ function formSubmitHandler (evt) {
   nameComponent.textContent = newName;
   let newJob = jobField.value;
   jobComponent.textContent = newJob;
-  popup.setAttribute('class', 'popup');
+  closePopup();
 }
 formElement.addEventListener('submit', formSubmitHandler);

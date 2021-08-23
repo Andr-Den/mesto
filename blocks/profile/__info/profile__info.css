@@ -1,14 +1,14 @@
 .profile__info {
-  width: min-content;
- align-self: center;
- display: grid;
- grid-template-columns: 1fr 1fr;
- column-gap: 18px;
+  /* width: 100%; */
+  align-self: center;
+  display: grid;
+  grid-template-columns: min-content min-content;
+  column-gap: 18px;
 }
 
 @media screen and (max-width: 320px){
   .profile__info {
-    padding-left: 30px;
     column-gap: 10px;
+    max-width: 320px;
   }
 }

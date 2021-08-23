@@ -8,10 +8,14 @@
   font-size: 18px;
   line-height: 22px;
   color: #FFFFFF;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
-@media screen and (max-width: 320px){
+@media screen and (max-width: 502px){
   .profile__subtitle {
+    padding-top: 14px;
     font-size: 14px;
     line-height: 17px;
     justify-self: center;

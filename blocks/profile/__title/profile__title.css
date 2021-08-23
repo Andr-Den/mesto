@@ -1,7 +1,8 @@
 .profile__title {
   margin: 0;
   padding: 0;
-  width: 294px;
+  width: 100%;
+  max-width: 294px;
   font-family: "Inter", "Arial", sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -13,13 +14,13 @@
   overflow: hidden;
 }
 
-@media screen and (max-width: 320px){
+@media screen and (max-width: 502px){
   .profile__title {
-    margin-top: 22.25px;
+    margin-top: 26px;
     width: 189px;
-font-size: 27px;
-line-height: 33px;
-justify-self: center;
-align-self: center;
+    font-size: 27px;
+    line-height: 33px;
+    justify-self: center;
+    align-self: center;
   }
 }

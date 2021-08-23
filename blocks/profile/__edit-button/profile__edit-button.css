@@ -6,6 +6,7 @@
   box-sizing: border-box;
   align-self: flex-end;
   margin-bottom: 7px;
+  background-color: black;
   background-image: url(../../../images/pensil.svg);
   background-repeat: no-repeat;
   background-position: center;

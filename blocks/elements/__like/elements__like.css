@@ -1,4 +1,4 @@
-.elements__group {
+.elements__like {
   margin-top: 6px;
   padding-left: 10px;
   background-image: url(../../../images/Vector.svg);
@@ -7,13 +7,14 @@
   height: 19px;
   opacity: 1;
   background-color: #ffffff;
+  border: none;
 }
 
-.elements__group:hover {
+.elements__like:hover {
   opacity: .5;
 }
 
-.elements__group:active {
+.elements__like:active {
   background-image: url(../../../images/Union.svg);
   opacity: 1;
 }

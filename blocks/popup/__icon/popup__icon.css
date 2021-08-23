@@ -1,11 +1,20 @@
 .popup__icon {
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  background: url(../../../images/CloseIcon.svg);
   width: 32px;
   height: 32px;
-  align-self: flex-end;
-  opacity: 1;
+  border: none;
 }
 
 .popup__icon:hover {
-opacity: .6;
-cursor: pointer;
+  opacity: .6;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 540px){
+  .popup__icon {
+    right: 0;
+  }
 }

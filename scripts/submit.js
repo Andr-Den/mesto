@@ -10,8 +10,8 @@ let jobText = jobComponent.textContent;
 let jobField = document.getElementById('input_job');
 
 function openPopup () {
-  nameField.setAttribute('value', nameText);
-  jobField.setAttribute('value', jobText);
+  nameField.setAttribute('value', nameText); //textContent не работает в этом случае, так как нет закрывающегося тэга
+  jobField.setAttribute('value', jobText); //textContent не работает в этом случае, так как нет закрывающегося тэга
   popup.classList.add('popup_opened');
 };
 openPopupButton.addEventListener('click', openPopup);

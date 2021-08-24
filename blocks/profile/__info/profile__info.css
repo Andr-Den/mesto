@@ -10,5 +10,6 @@
   .profile__info {
     column-gap: 10px;
     max-width: 320px;
+    padding-left: 25px;
   }
 }

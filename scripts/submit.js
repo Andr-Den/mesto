@@ -2,16 +2,14 @@ let popup = document.querySelector('.popup');
 let openPopupButton = document.querySelector('.profile__edit-button');
 
 let nameComponent = document.querySelector('.profile__title');
-let nameText = nameComponent.textContent;
 let nameField = document.getElementById('input_name');
 
 let jobComponent = document.querySelector('.profile__subtitle');
-let jobText = jobComponent.textContent;
 let jobField = document.getElementById('input_job');
 
 function openPopup () {
-  nameField.textContent = nameText; 
-  jobField.textContent = jobText;
+  nameField.value = nameComponent.textContent; 
+  jobField.value = jobComponent.textContent;
   popup.classList.add('popup_opened');
 };
 openPopupButton.addEventListener('click', openPopup);

@@ -61,11 +61,23 @@
             </form>
           </div>
         </div>
+        <div class="popup-image">
+          <div class="popup__container">
+            <button class="popup-image__icon" type="button"></button>
+            <form class="popup__form" name="edit_profile_form">
+              <h2 class="popup__title">Новое место</h2>
+              <input type="text" placeholder="Название" id="input_name" class="popup__input" name="input_name">
+              <input type="text" placeholder="Ссылка на картинку" id="input_job" class="popup__input" name="input_job">
+              <input type="submit" class="popup__submit-button" value="Создать" name="submit_button">
+            </form>
+          </div>
+        </div>
     </main>
     <footer class="footer">
       <p class="footer__copyright">&copy;2021 Mesto Russia</p>
     </footer>
   </div>
   <script src="./scripts/submit.js"></script>
+  <script src="./scripts/save.js"></script>
 </body>
 </html>

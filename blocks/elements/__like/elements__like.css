@@ -12,9 +12,7 @@
 
 .elements__like:hover {
   opacity: .5;
+  cursor: pointer;
 }
 
-.elements__like:active {
-  background-image: url(../../../images/Union.svg);
-  opacity: 1;
-}
+

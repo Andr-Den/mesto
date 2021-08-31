@@ -24,60 +24,12 @@
       </section>
       <section class="elements">
         <ul class="elements__list">
-          <li class="elements__element">
-            <div class="elements__button">
-              <img src="./images/cap.svg">
-              <img src="./images/basket.svg">
-            </div>
-            <img src="./images/kirill-pershin-1088404-unsplash.png" alt="церковь" class="elements__image">
-            <div class="elements__description"><h2 class="elements__text">Карачаевск</h2><button class="elements__like" type="button"></button></div>
-          </li>
-          <li class="elements__element">
-            <div class="elements__button">
-              <img src="./images/cap.svg">
-              <img src="./images/basket.svg">
-            </div>
-            <img src="./images/kirill-pershin-1404681-unsplash.png" alt="эльбрус" class="elements__image">
-            <div class="elements__description"><h2 class="elements__text">Гора Эльбрус</h2><button class="elements__like" type="button"></button></div>
-          </li>
-          <li class="elements__element">
-            <div class="elements__button">
-              <img src="./images/cap.svg">
-              <img src="./images/basket.svg">
-            </div>
-            <img src="./images/kirill-pershin-1556355-unsplash.png" alt="скала" class="elements__image">
-            <div class="elements__description"><h2 class="elements__text">Домбай</h2><button class="elements__like" type="button"></button></div>
-          </li>
-          <li class="elements__element">
-            <div class="elements__button">
-              <img src="./images/cap.svg">
-              <img src="./images/basket.svg">
-            </div>
-            <img src="./images/kirill-pershin-1404681-unsplash.png" alt="эльбрус" class="elements__image">
-            <div class="elements__description"><h2 class="elements__text">Гора Эльбрус</h2><button class="elements__like" type="button"></button></div>
-          </li>
-          <li class="elements__element">
-            <div class="elements__button">
-              <img src="./images/cap.svg">
-              <img src="./images/basket.svg">
-            </div>
-            <img src="./images/kirill-pershin-1556355-unsplash.png" alt="скала" class="elements__image">
-            <div class="elements__description"><h2 class="elements__text">Домбай</h2><button class="elements__like" type="button"></button></div>
-          </li>
-          <li class="elements__element">
-            <div class="elements__button">
-              <img src="./images/cap.svg">
-              <img src="./images/basket.svg">
-            </div>
-            <img src="./images/kirill-pershin-1088404-unsplash.png" alt="церковь" class="elements__image">
-            <div class="elements__description"><h2 class="elements__text">Карачаево-Черкеcсия</h2><button class="elements__like" type="button"></button></div>
-          </li>
         </ul>
       </section>
-      <div class="popup">
+      <div class="popup popup_type_profile">
           <div class="popup__container">
-            <button class="popup__icon" type="button"></button>
-            <form class="popup__form" name="edit_profile_form">
+            <button class="popup__icon popup__icon_profile" type="button"></button>
+            <form class="popup__form popup__form_profile" name="edit_profile_form">
               <h2 class="popup__title">Редактировать профиль</h2>
               <input type="text" placeholder="Ваше имя" id="input_name" class="popup__input" name="input_name">
               <input type="text" placeholder="Род занятий" id="input_job" class="popup__input" name="input_job">
@@ -85,14 +37,14 @@
             </form>
           </div>
         </div>
-        <div class="popup-image">
+        <div class="popup popup_type_add-cards">
           <div class="popup__container">
-            <button class="popup-image__icon" type="button"></button>
-            <form class="popup__form" name="edit_profile_form">
+            <button class="popup__icon popup__icon_add-card" type="button"></button>
+            <form class="popup__form popup__form_add-card" name="add_cards">
               <h2 class="popup__title">Новое место</h2>
-              <input type="text" placeholder="Название" id="input_name" class="popup__input" name="input_name">
-              <input type="text" placeholder="Ссылка на картинку" id="input_job" class="popup__input" name="input_job">
-              <input type="submit" class="popup__submit-button" value="Создать" name="submit_button">
+              <input type="text" placeholder="Название" id="input_card_name" class="popup__input" name="input_card_name">
+              <input type="text" placeholder="Ссылка на картинку" id="input_link" class="popup__input" name="input_link">
+              <input type="submit" class="popup__submit-button" value="Создать" name="create_button">
             </form>
           </div>
         </div>
@@ -101,7 +53,16 @@
       <p class="footer__copyright">&copy;2021 Mesto Russia</p>
     </footer>
   </div>
+  <template id="card-template">
+    <li class="elements__element">
+      <div class="elements__button">
+        <img src="./images/cap.svg">
+        <img src="./images/basket.svg">
+      </div>
+      <img src="#" alt="#" class="elements__image">
+      <div class="elements__description"><h2 class="elements__text"></h2><button class="elements__like" type="button"></button></div>
+    </li>
+  </template>
   <script src="./scripts/submit.js"></script>
-  <script src="./scripts/save.js"></script>
 </body>
 </html>

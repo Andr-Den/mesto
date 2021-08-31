@@ -83,6 +83,7 @@ const cardTemplate = document.querySelector('#card-template').content;
 const addCard = (card, id) => {
   const cardElement = cardTemplate.querySelector('.elements__element').cloneNode(true);
   cardElement.querySelector('.elements__image').src = card.link;
+  cardElement.querySelector('.elements__image').alt = card.name;//TODO сделать не по уродски, если картинка не прогрузилась
   cardElement.querySelector('.elements__text').textContent = card.name;
   cardElement.setAttribute("id", `card_${id}`)
 

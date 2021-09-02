@@ -50,6 +50,13 @@ closeAddCardPopupButton.addEventListener('click', () => {
   closePopup(addCardPopup);
 });
 
+let imagePopup = document.querySelector('.popup_type_open-cards');
+let closeImageButton = document.querySelector('.popup__icon_open-cards');
+
+closeImageButton.addEventListener('click', () => {
+  closePopup(imagePopup)
+})
+
 const initialCards = [
   {
     name: 'Архыз',
@@ -104,6 +111,12 @@ function rerender () {
     document.getElementById(`card_${i}`).querySelector('.elements__like').addEventListener('click', function (evt) {
       evt.target.classList.toggle('elements__like_active');
     })
+    document.getElementById(`card_${i}`).querySelector('.elements__image').addEventListener('click', () => {
+      imagePopup.querySelector('.popup__image').src = initialCards[i].link;
+      imagePopup.querySelector('.popup__image').alt = initialCards[i].name;
+      imagePopup.querySelector('.popup__figcaption').textContent = initialCards[i].name;
+      openPopup(imagePopup)
+    })
   }
 }
 rerender()
@@ -125,4 +138,3 @@ function deleteCardHandler (id) {
   initialCards.splice(id, 1);
   rerender();
 }
-

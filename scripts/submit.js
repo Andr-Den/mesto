@@ -34,7 +34,7 @@ function profileFormSubmitHandler (evt) {
 }
 profileFormElement.addEventListener('submit', profileFormSubmitHandler);
 
-let addCardPopup = document.querySelector('.popup_type_add-cards'); //TODO сделать card, а не cards
+let addCardPopup = document.querySelector('.popup_type_add-card'); 
 let openAddCardPopupButton = document.querySelector('.profile__add-button');
 let closeAddCardPopupButton = document.querySelector('.popup__icon_add-card');
 let imageField = document.getElementById('input_card_name');
@@ -83,7 +83,7 @@ const cardTemplate = document.querySelector('#card-template').content;
 const addCard = (card, id) => {
   const cardElement = cardTemplate.querySelector('.elements__element').cloneNode(true);
   cardElement.querySelector('.elements__image').src = card.link;
-  cardElement.querySelector('.elements__image').alt = card.name;//TODO сделать не по уродски, если картинка не прогрузилась
+  cardElement.querySelector('.elements__image').alt = card.name;
   cardElement.querySelector('.elements__text').textContent = card.name;
   cardElement.setAttribute("id", `card_${id}`)
 
@@ -101,6 +101,9 @@ function rerender () {
   })
   for (let i = 0; i < initialCards.length; i++) {
     document.getElementById(`card_${i}`).querySelector('.elements__button').addEventListener('click', () => deleteCardHandler(i));
+    document.getElementById(`card_${i}`).querySelector('.elements__like').addEventListener('click', function (evt) {
+      evt.target.classList.toggle('elements__like_active');
+    })
   }
 }
 rerender()

@@ -13,7 +13,6 @@
   @media screen and (max-width: 847px){
     .elements__list {
         grid-template-columns: 282px;
-        /* width: 320px; */
         justify-content: center;
   }
   }

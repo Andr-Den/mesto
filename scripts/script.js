@@ -64,7 +64,7 @@ function profileFormSubmitHandler (evt) {
 }
 
 function handleLikeClick (evt) {
-  evt.target.classList.toggle('elements__like_active');
+  evt.target.classList.toggle('card__like_active');
 }
 
 function handleDeleteClick (evt) {
@@ -72,15 +72,15 @@ function handleDeleteClick (evt) {
 }
 
 function addCard (card) {
-  const cardElement = cardTemplate.querySelector('.elements__element').cloneNode(true);
-  const elementImage = cardElement.querySelector('.elements__image');
+  const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
+  const elementImage = cardElement.querySelector('.card__image');
   elementImage.src = card.link;
   elementImage.alt = card.name;
-  cardElement.querySelector('.elements__text').textContent = card.name;
+  cardElement.querySelector('.card__text').textContent = card.name;
 
-  cardElement.querySelector('.elements__button').addEventListener('click', handleDeleteClick);
+  cardElement.querySelector('.card__button').addEventListener('click', handleDeleteClick);
 
-  cardElement.querySelector('.elements__like').addEventListener('click', handleLikeClick)
+  cardElement.querySelector('.card__like').addEventListener('click', handleLikeClick)
 
   elementImage.addEventListener('click', () => {
     const popupImage = imagePopup.querySelector('.popup__image')

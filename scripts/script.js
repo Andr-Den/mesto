@@ -17,6 +17,8 @@ const cardsElement = document.querySelector('.elements__list');
 const cardTemplate = document.querySelector('#card-template').content;
 
 const imagePopup = document.querySelector('.popup_type_open-cards');
+const popupImage = imagePopup.querySelector('.popup__image')
+const imageCaption = imagePopup.querySelector('.popup__figcaption');
 const closeImageButton = document.querySelector('.popup__icon_open-cards');
 
 const initialCards = [
@@ -68,7 +70,7 @@ function handleLikeClick (evt) {
 }
 
 function handleDeleteClick (evt) {
-  evt.target.parentNode.parentNode.remove()
+  evt.target.closest(".card").remove()
 }
 
 function addCard (card) {
@@ -83,10 +85,9 @@ function addCard (card) {
   cardElement.querySelector('.card__like').addEventListener('click', handleLikeClick)
 
   elementImage.addEventListener('click', () => {
-    const popupImage = imagePopup.querySelector('.popup__image')
     popupImage.src = card.link;
     popupImage.alt = card.name;
-    imagePopup.querySelector('.popup__figcaption').textContent = card.name;
+    imageCaption.textContent = card.name;
     openPopup(imagePopup)
   })
 

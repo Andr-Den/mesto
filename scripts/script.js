@@ -73,7 +73,7 @@ function handleDeleteClick (evt) {
   evt.target.closest(".card").remove()
 }
 
-function addCard (card) {
+function generateCard (card) {
   const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
   const elementImage = cardElement.querySelector('.card__image');
   elementImage.src = card.link;
@@ -85,32 +85,37 @@ function addCard (card) {
   cardElement.querySelector('.card__like').addEventListener('click', handleLikeClick)
 
   elementImage.addEventListener('click', () => {
-    popupImage.src = card.link;
-    popupImage.alt = card.name;
-    imageCaption.textContent = card.name;
-    openPopup(imagePopup)
-  })
+    handleImageClick(card)
+  });  
+  return cardElement;
+};
 
+function handleImageClick (card){
+  popupImage.src = card.link;
+  popupImage.alt = card.name;
+  imageCaption.textContent = card.name;
+  openPopup(imagePopup)
+};
+
+function renderCard (cardElement) {
   cardsElement.prepend(cardElement);
 };
 
 function addCardFormSubmitHandler (evt) {
   evt.preventDefault();
-  addCard(
+  renderCard(generateCard(
     {
       name: imageField.value,
       link: linkField.value
     }
-  )
+  ))
   imageField.value = "";
   linkField.value = "";
   closePopup(addCardPopup);
 }
 
-
-
 initialCards.forEach((card) => {
-  addCard(card)
+  renderCard(generateCard(card))
 })
 
 openProfileInfoPopupButton.addEventListener('click', () => {

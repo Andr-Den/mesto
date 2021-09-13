@@ -21,6 +21,10 @@ const popupImage = imagePopup.querySelector('.popup__image')
 const imageCaption = imagePopup.querySelector('.popup__figcaption');
 const closeImageButton = document.querySelector('.popup__icon_open-cards');
 
+const closeProfilePopupClick = document.querySelector('.popup_type_profile');
+const closeAddCardPopupClick = document.querySelector('.popup_type_add-card');
+const closeImagePopupClick = document.querySelector('.popup_type_open-cards');
+
 const initialCards = [
   {
     name: 'Архыз',
@@ -139,3 +143,22 @@ closeImageButton.addEventListener('click', () => {
 })
 
 addCardFormElement.addEventListener('submit', addCardFormSubmitHandler);
+
+const keyHandler = (evt) => {
+  if (evt.keyCode === 27){
+    const popupToClose = document.querySelector('.popup_opened')
+    closePopup(popupToClose)
+  }
+};
+
+document.addEventListener('keydown', keyHandler);
+
+// closeProfilePopupClick.addEventListener('click', () => {
+//  closePopup(profileInfoPopup);
+// });
+// closeAddCardPopupClick.addEventListener('click', () => {
+//   closePopup(addCardPopup);
+//  });
+//  closeImagePopupClick.addEventListener('click', () => {
+//   closePopup(imagePopup);
+//  });

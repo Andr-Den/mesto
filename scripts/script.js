@@ -21,9 +21,9 @@ const popupImage = imagePopup.querySelector('.popup__image')
 const imageCaption = imagePopup.querySelector('.popup__figcaption');
 const closeImageButton = document.querySelector('.popup__icon_open-cards');
 
-const closeProfilePopupClick = document.querySelector('.popup_type_profile');
-const closeAddCardPopupClick = document.querySelector('.popup_type_add-card');
-const closeImagePopupClick = document.querySelector('.popup_type_open-cards');
+// const closeProfilePopupClick = document.querySelector('.popup_type_profile');
+// const closeAddCardPopupClick = document.querySelector('.popup_type_add-card');
+// const closeImagePopupClick = document.querySelector('.popup_type_open-cards');
 
 const initialCards = [
   {

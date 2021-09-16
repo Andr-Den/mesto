@@ -21,9 +21,9 @@ const popupImage = imagePopup.querySelector('.popup__image')
 const imageCaption = imagePopup.querySelector('.popup__figcaption');
 const closeImageButton = document.querySelector('.popup__icon_open-cards');
 
-// const closeProfilePopupClick = document.querySelector('.popup_type_profile');
-// const closeAddCardPopupClick = document.querySelector('.popup_type_add-card');
-// const closeImagePopupClick = document.querySelector('.popup_type_open-cards');
+const closeProfilePopupClick = document.querySelector('.popup_type_profile');
+const closeAddCardPopupClick = document.querySelector('.popup_type_add-card');
+const closeImagePopupClick = document.querySelector('.popup_type_open-cards');
 
 const initialCards = [
   {
@@ -153,12 +153,18 @@ const keyHandler = (evt) => {
 
 document.addEventListener('keydown', keyHandler);
 
-// closeProfilePopupClick.addEventListener('click', () => {
-//  closePopup(profileInfoPopup);
-// });
-// closeAddCardPopupClick.addEventListener('click', () => {
-//   closePopup(addCardPopup);
-//  });
-//  closeImagePopupClick.addEventListener('click', () => {
-//   closePopup(imagePopup);
-//  });
+closeProfilePopupClick.addEventListener('click', (event) => {
+  if (event.target.getAttribute("class") === "popup popup_type_profile popup_opened") {
+    closePopup(profileInfoPopup);
+  };
+});
+closeAddCardPopupClick.addEventListener('click', (event) => {
+  if (event.target.getAttribute("class") === "popup popup_type_add-card popup_opened") {
+    closePopup(addCardPopup);
+  };
+});
+closeImagePopupClick.addEventListener('click', (event) => {
+  if (event.target.getAttribute("class") === "popup popup_type_open-cards popup_opened") {
+    closePopup(imagePopup);
+  };
+});

@@ -30,25 +30,32 @@
           <div class="popup__container">
             <button class="popup__icon popup__icon_profile" type="button"></button>
             <form class="popup__form popup__form_profile" name="edit_profile_form" novalidate>
-              <h2 class="popup__title">Редактировать профиль</h2>
-              <input type="text" placeholder="Ваше имя" id="input_name" class="popup__input" name="input_name" minlength="2" maxlength="40" required>
-              <span class="popup__input-error input_name-error">Вы пропустили это поле</span> <!-- не уверен пока, что это нужно, но оно и не работает -->
-              <input type="text" placeholder="Род занятий" id="input_job" class="popup__input" name="input_job" minlength="2" maxlength="200" required>
-              <input type="submit" class="popup__submit-button popup__submit-button_no_active" value="Сохранить" name="submit_button">
+              <fieldset class="popup__set">
+                <h2 class="popup__title">Редактировать профиль</h2>
+                <input type="text" placeholder="Ваше имя" id="input_name" class="popup__input" name="input_name" minlength="2" maxlength="40" required>
+                <span class="popup__input-error input_name-error"></span>
+                <input type="text" placeholder="Род занятий" id="input_job" class="popup__input" name="input_job" minlength="2" maxlength="200" required>
+                <span class="popup__input-error input_job-error"></span>
+                <input type="submit" class="popup__submit-button" value="Сохранить" name="submit_button" disabled="">
+              </fieldset> 
             </form>
           </div>
-        </div>
-        <div class="popup popup_type_add-card">
-          <div class="popup__container">
-            <button class="popup__icon popup__icon_add-card" type="button"></button>
-            <form class="popup__form popup__form_add-card" name="add_cards" novalidate>
+      </div>
+      <div class="popup popup_type_add-card">
+        <div class="popup__container">
+          <button class="popup__icon popup__icon_add-card" type="button"></button>
+          <form class="popup__form popup__form_add-card" name="add_cards" novalidate>
+            <fieldset class="popup__set">
               <h2 class="popup__title">Новое место</h2>
               <input type="text" placeholder="Название" id="input_card_name" class="popup__input" name="input_card_name" minlength="2" maxlength="30" required>
+              <span class="popup__input-error input_card_name-error"></span>
               <input type="url" placeholder="Ссылка на картинку" id="input_link" class="popup__input" name="input_link" required>
-              <input type="submit" class="popup__submit-button popup__submit-button_no_active" value="Создать" name="create_button">
-            </form>
-          </div>
+              <span class="popup__input-error input_link-error"></span>
+              <input type="submit" class="popup__submit-button" value="Создать" name="create_button">
+            </fieldset>
+          </form>
         </div>
+      </div>
         <div class="popup popup_type_open-cards">
           <div class="popup__figure">
             <button class="popup__icon popup__icon_open-cards" type="button"></button>

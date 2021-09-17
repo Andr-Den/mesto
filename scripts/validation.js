@@ -1,5 +1,5 @@
 const showInputError = (formElement, inputElement, errorMessage) => {
-  const errorElement = formElement.querySelector(`.popup__${inputElement.id}_error`);
+  const errorElement = formElement.querySelector(`.popup__${inputElement.id}_type_error`);
   console.log(inputElement)
   inputElement.classList.add('popup__input_type_error');
   errorElement.textContent = errorMessage;

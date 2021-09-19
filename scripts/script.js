@@ -60,6 +60,7 @@ function openPopup (popup) {
 }; 
  
 function closePopup (popup) { 
+  document.removeEventListener('keydown', keyHandler); 
   popup.classList.remove('popup_opened'); 
 }; 
  

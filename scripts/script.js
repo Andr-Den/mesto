@@ -1,4 +1,5 @@
 import Card from './card.js'
+import FormValidator from './formValidator.js'
 import { openPopup, closePopup } from './utils.js';
 
 const profileInfoPopup = document.querySelector('.popup_type_profile'); 
@@ -52,7 +53,16 @@ const initialCards = [
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg' 
   } 
 ];
- 
+
+const validationObject = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__submit-button',
+  inactiveButtonClass: 'popup__submit-button_no-active',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__input-error_active'
+}
+
 function profileFormSubmitHandler (evt) { 
   evt.preventDefault(); 
   const newName = nameField.value; 
@@ -83,13 +93,17 @@ function addCardFormSubmitHandler (evt) {
  
 openProfileInfoPopupButton.addEventListener('click', () => { 
   nameField.value = nameComponent.textContent;  
-  jobField.value = jobComponent.textContent; 
+  jobField.value = jobComponent.textContent;
+  const validator = new FormValidator(validationObject, profileInfoPopup.querySelector(validationObject.formSelector))
+  validator.enableValidation()
   openPopup(profileInfoPopup) 
 }); 
 closeProfileInfoPopupButton.addEventListener('click', () => {closePopup(profileInfoPopup)}); 
 profileFormElement.addEventListener('submit', profileFormSubmitHandler); 
  
-openAddCardPopupButton.addEventListener('click', () => { 
+openAddCardPopupButton.addEventListener('click', () => {
+  const validator = new FormValidator(validationObject, addCardPopup.querySelector(validationObject.formSelector))
+  validator.enableValidation()
   openPopup(addCardPopup); 
 }); 
  

@@ -1,3 +1,6 @@
+import Card from './card.js'
+import { openPopup, closePopup } from './utils.js';
+
 const profileInfoPopup = document.querySelector('.popup_type_profile'); 
 const openProfileInfoPopupButton = document.querySelector('.profile__edit-button'); 
 const nameComponent = document.querySelector('.profile__title'); 
@@ -13,12 +16,8 @@ const closeAddCardPopupButton = document.querySelector('.popup__icon_add-card');
 const imageField = document.getElementById('input-card-name'); 
 const linkField = document.getElementById('input-link'); 
 const addCardFormElement = document.querySelector('.popup__form_add-card'); 
-const cardsElement = document.querySelector('.elements__list'); 
-const cardTemplate = document.querySelector('#card-template').content; 
  
-const imagePopup = document.querySelector('.popup_type_open-cards'); 
-const popupImage = imagePopup.querySelector('.popup__image') 
-const imageCaption = imagePopup.querySelector('.popup__figcaption'); 
+const imagePopup = document.querySelector('.popup_type_open-cards');
 const closeImageButton = document.querySelector('.popup__icon_open-cards'); 
  
 const closeProfilePopupClick = document.querySelector('.popup_type_profile'); 
@@ -52,17 +51,7 @@ const initialCards = [
     name: 'Байкал', 
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg' 
   } 
-];  
- 
-function openPopup (popup) { 
-  document.addEventListener('keydown', keyHandler); 
-  popup.classList.add('popup_opened'); 
-}; 
- 
-function closePopup (popup) { 
-  document.removeEventListener('keydown', keyHandler); 
-  popup.classList.remove('popup_opened'); 
-}; 
+];
  
 function profileFormSubmitHandler (evt) { 
   evt.preventDefault(); 
@@ -71,62 +60,26 @@ function profileFormSubmitHandler (evt) {
   const newJob = jobField.value; 
   jobComponent.textContent = newJob; 
   closePopup(profileInfoPopup); 
-} 
- 
-function handleLikeClick (evt) { 
-  evt.target.classList.toggle('card__like_active'); 
-} 
- 
-function handleDeleteClick (evt) { 
-  evt.target.closest(".card").remove() 
-} 
- 
-function generateCard (card) { 
-  const cardElement = cardTemplate.querySelector('.card').cloneNode(true); 
-  const elementImage = cardElement.querySelector('.card__image'); 
-  elementImage.src = card.link; 
-  elementImage.alt = card.name; 
-  cardElement.querySelector('.card__text').textContent = card.name; 
- 
-  cardElement.querySelector('.card__button').addEventListener('click', handleDeleteClick); 
- 
-  cardElement.querySelector('.card__like').addEventListener('click', handleLikeClick) 
- 
-  elementImage.addEventListener('click', () => { 
-    handleImageClick(card) 
-  });   
-  return cardElement; 
-}; 
- 
-function handleImageClick (card){ 
-  popupImage.src = card.link; 
-  popupImage.alt = card.name; 
-  imageCaption.textContent = card.name; 
-  openPopup(imagePopup) 
-}; 
- 
-function renderCard (cardElement) { 
-  cardsElement.prepend(cardElement); 
-};
+}
+
+initialCards.forEach((item) => {
+  const card = new Card(item.link, item.name);
+  const cardElement = card.generateCard();
+
+  document.querySelector('.elements__list').append(cardElement);
+});
 
 function addCardFormSubmitHandler (evt) { 
   evt.preventDefault(); 
-  renderCard(generateCard( 
-    { 
-      name: imageField.value, 
-      link: linkField.value 
-    } 
-  )) 
+  const card = new Card(linkField.value , imageField.value);
+  const cardElement = card.generateCard();
+  document.querySelector('.elements__list').prepend(cardElement);
   imageField.value = ""; 
   linkField.value = ""; 
   buttonElement.classList.add('popup__submit-button_no-active'); 
   buttonElement.disabled = "disabled"; 
   closePopup(addCardPopup); 
-} 
- 
-initialCards.forEach((card) => { 
-  renderCard(generateCard(card)) 
-}) 
+}
  
 openProfileInfoPopupButton.addEventListener('click', () => { 
   nameField.value = nameComponent.textContent;  
@@ -148,14 +101,7 @@ closeImageButton.addEventListener('click', () => {
   closePopup(imagePopup) 
 }) 
  
-addCardFormElement.addEventListener('submit', addCardFormSubmitHandler); 
- 
-const keyHandler = (evt) => { 
-  if (evt.key === 'Escape'){ 
-    const popupToClose = document.querySelector('.popup_opened') 
-    closePopup(popupToClose) 
-  } 
-}; 
+addCardFormElement.addEventListener('submit', addCardFormSubmitHandler);  
  
 closeProfilePopupClick.addEventListener('click', (event) => { 
   if (event.target.getAttribute("class") === "popup popup_type_profile popup_opened") { 

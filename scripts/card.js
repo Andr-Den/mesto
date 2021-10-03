@@ -1,18 +1,15 @@
-import { openPopup } from './utils.js'
-
-const imagePopup = document.querySelector('.popup_type_open-cards'); 
-const popupImage = imagePopup.querySelector('.popup__image') 
-const imageCaption = imagePopup.querySelector('.popup__figcaption');
+import { openPopup, imagePopup, popupImage, imageCaption } from './utils.js'
 
 class Card {
-  constructor(link, name) {
+  constructor(link, name, templateClass) {
     this._link = link;
     this._name = name;
+    this._templateClass = templateClass;
   }
 
   _getTemplate() {
     const cardElement = document
-      .querySelector('.card-template')
+      .querySelector(this._templateClass)
       .content
       .querySelector('.card')
       .cloneNode(true);
@@ -23,8 +20,8 @@ class Card {
     evt.target.classList.toggle('card__like_active'); 
   } 
   
-  _handleDeleteClick (evt) { 
-    evt.target.closest(".card").remove() 
+  _handleDeleteClick (element) {
+    element.remove()
   }
   _handleOpenPopup() {
     popupImage.src = this._link; 
@@ -36,10 +33,11 @@ class Card {
   generateCard() {
     this._element = this._getTemplate();
     this._setEventListeners();
-    this._element.querySelector('.card__image').src = this._link;
-    this._element.querySelector('.card__image').alt = this._name;
+    const CardImage = this._element.querySelector('.card__image')
+    CardImage.src = this._link;
+    CardImage.alt = this._name;
     this._element.querySelector('.card__text').textContent = this._name;
-    this._element.querySelector('.card__button').addEventListener('click', this._handleDeleteClick); 
+    this._element.querySelector('.card__button').addEventListener('click', () => {this._handleDeleteClick(this._element)}); 
     this._element.querySelector('.card__like').addEventListener('click', this._handleLikeClick);
 
     return this._element;

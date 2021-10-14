@@ -1,28 +1,42 @@
 import Card from './card.js'
 import FormValidator from './formValidator.js'
-import { openPopup, closePopup, imagePopup } from './utils.js';
+import Section from './section.js'
+import PopupWithImage from './popupWithImage.js'
+import PopupWithForm from './popupWithForm.js'
+import UserInfo from './userInfo.js'
 
-const profileInfoPopup = document.querySelector('.popup_type_profile'); 
+const profileInfoPopupElement = document.querySelector('.popup_type_profile'); 
 const openProfileInfoPopupButton = document.querySelector('.profile__edit-button'); 
 const nameComponent = document.querySelector('.profile__title'); 
 const nameField = document.getElementById('input-name'); 
 const jobComponent = document.querySelector('.profile__subtitle'); 
 const jobField = document.getElementById('input-job'); 
-const closeProfileInfoPopupButton = document.querySelector('.popup__icon_profile'); 
-const profileFormElement = document.querySelector('.popup__form_profile'); 
-
-const addCardPopup = document.querySelector('.popup_type_add-card');  
-const openAddCardPopupButton = document.querySelector('.profile__add-button'); 
-const closeAddCardPopupButton = document.querySelector('.popup__icon_add-card'); 
+const addCardPopupElement = document.querySelector('.popup_type_add-card');  
+const openAddCardPopupButton = document.querySelector('.profile__add-button');
 const imageField = document.getElementById('input-card-name'); 
 const linkField = document.getElementById('input-link'); 
 const addCardFormElement = document.querySelector('.popup__form_add-card'); 
 const elementsList = document.querySelector('.elements__list')
+const buttonElement = addCardFormElement.querySelector('.popup__submit-button');
 
-const closeImageButton = document.querySelector('.popup__icon_open-cards'); 
- 
-const buttonElement = addCardFormElement.querySelector('.popup__submit-button'); 
- 
+const userInfo = new UserInfo(document.querySelector('.profile__title').textContent, document.querySelector('.profile__subtitle').textContent)
+
+const profileInfoPopup = new PopupWithForm('.popup_type_profile', (evt) => { 
+  evt.preventDefault(); 
+  userInfo.setUserInfo()
+  profileInfoPopup.close(); 
+});
+const addCardPopup = new PopupWithForm('.popup_type_add-card', (evt) => { 
+  evt.preventDefault(); 
+  const newCard = new Card(linkField.value, imageField.value, '.card-template', () => { imagePopup.open(linkField.value, imageField.value) })
+  const cardElement = newCard.generateCard()
+  cardList.addItem(cardElement);
+  buttonElement.classList.add('popup__submit-button_no-active'); 
+  buttonElement.disabled = "disabled"; 
+  addCardPopup.close(); 
+});
+const imagePopup = new PopupWithImage('.popup_type_open-cards');
+
 const initialCards = [ 
   { 
     name: 'Архыз', 
@@ -59,76 +73,37 @@ const validationObject = {
   errorClass: 'popup__input-error_active'
 }
 
-function profileFormSubmitHandler (evt) { 
-  evt.preventDefault(); 
-  const newName = nameField.value; 
-  nameComponent.textContent = newName; 
-  const newJob = jobField.value; 
-  jobComponent.textContent = newJob; 
-  closePopup(profileInfoPopup); 
-}
+const cardList = new Section (
+  {
+    items: initialCards,
+    renderer: (item) => {
+      const card = new Card(item.link, item.name, '.card-template', () => { imagePopup.open(item.link, item.name) })
+      const cardElement = card.generateCard();
+      cardList.addItem(cardElement);
+    }
+  },
+  elementsList
+);
 
-function createCard (link, name) {
-  const card = new Card(link, name, '.card-template');
-  return card.generateCard();
-}
+cardList.renderItems();
 
-initialCards.forEach((item) => {
-  const cardElement = createCard(item.link, item.name)
-  elementsList.append(cardElement);
-});
-
-const profileValidator = new FormValidator(validationObject, profileInfoPopup.querySelector(validationObject.formSelector))
+const profileValidator = new FormValidator(validationObject, profileInfoPopupElement.querySelector(validationObject.formSelector))
 profileValidator.enableValidation()
 
-const addCardValidator = new FormValidator(validationObject, addCardPopup.querySelector(validationObject.formSelector))
+const addCardValidator = new FormValidator(validationObject, addCardPopupElement.querySelector(validationObject.formSelector))
 addCardValidator.enableValidation()
-
-function addCardFormSubmitHandler (evt) { 
-  evt.preventDefault(); 
-  const cardElement = createCard(linkField.value, imageField.value);
-  elementsList.prepend(cardElement);
-  imageField.value = ""; 
-  linkField.value = ""; 
-  buttonElement.classList.add('popup__submit-button_no-active'); 
-  buttonElement.disabled = "disabled"; 
-  closePopup(addCardPopup); 
-}
  
-openProfileInfoPopupButton.addEventListener('click', () => { 
-  nameField.value = nameComponent.textContent;  
-  jobField.value = jobComponent.textContent;
-  openPopup(profileInfoPopup) 
-}); 
-closeProfileInfoPopupButton.addEventListener('click', () => {closePopup(profileInfoPopup)}); 
-profileFormElement.addEventListener('submit', profileFormSubmitHandler); 
+openProfileInfoPopupButton.addEventListener('click', () => {
+  const userInfoObject = userInfo.getUserInfo();
+  nameField.value = userInfoObject.name;  
+  jobField.value = userInfoObject.job;
+  profileInfoPopup.open()
+});
  
 openAddCardPopupButton.addEventListener('click', () => {
-  openPopup(addCardPopup); 
-}); 
- 
-closeAddCardPopupButton.addEventListener('click', () => { 
-  closePopup(addCardPopup); 
-}); 
- 
-closeImageButton.addEventListener('click', () => { 
-  closePopup(imagePopup) 
-}) 
- 
-addCardFormElement.addEventListener('submit', addCardFormSubmitHandler);  
- 
-profileInfoPopup.addEventListener('click', (event) => { 
-  if (event.target.getAttribute("class") === "popup popup_type_profile popup_opened") { 
-    closePopup(profileInfoPopup); 
-  }; 
-}); 
-addCardPopup.addEventListener('click', (event) => { 
-  if (event.target.getAttribute("class") === "popup popup_type_add-card popup_opened") { 
-    closePopup(addCardPopup); 
-  }; 
-}); 
-imagePopup.addEventListener('click', (event) => { 
-  if (event.target.getAttribute("class") === "popup popup_type_open-cards popup_opened") { 
-    closePopup(imagePopup); 
-  }; 
-}); 
+  addCardPopup.open(); 
+});
+
+profileInfoPopup.setEventListeners();
+addCardPopup.setEventListeners();
+imagePopup.setEventListeners();

@@ -1,0 +1,19 @@
+{
+  "name": "mesto",
+  "version": "1.0.0",
+  "description": "* добавлено закрытие форм по нажатию клавишы Esc\r * добавлено закрытие форм по клику вне форм\r * добавлены валидация полей форм",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/telcontar2021/mesto.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/telcontar2021/mesto/issues"
+  },
+  "homepage": "https://github.com/telcontar2021/mesto#readme"
+}

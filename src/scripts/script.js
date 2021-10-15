@@ -1,3 +1,5 @@
+import '../pages/index.css';
+
 import Card from './card.js'
 import FormValidator from './formValidator.js'
 import Section from './section.js'
@@ -6,10 +8,8 @@ import PopupWithForm from './popupWithForm.js'
 import UserInfo from './userInfo.js'
 
 const profileInfoPopupElement = document.querySelector('.popup_type_profile'); 
-const openProfileInfoPopupButton = document.querySelector('.profile__edit-button'); 
-const nameComponent = document.querySelector('.profile__title'); 
-const nameField = document.getElementById('input-name'); 
-const jobComponent = document.querySelector('.profile__subtitle'); 
+const openProfileInfoPopupButton = document.querySelector('.profile__edit-button');
+const nameField = document.getElementById('input-name');
 const jobField = document.getElementById('input-job'); 
 const addCardPopupElement = document.querySelector('.popup_type_add-card');  
 const openAddCardPopupButton = document.querySelector('.profile__add-button');

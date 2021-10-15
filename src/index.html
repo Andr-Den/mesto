@@ -3,18 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./pages/index.css">
   <title>Место</title>
 </head>
 <body>
   <div class="page">
     <header class="header">
-      <img src="./images/logo.svg" alt="логотип" class="header__logo">
+      <img src="<%=require('./images/logo.svg')%>" alt="логотип" class="header__logo">
     </header>
     <main class="content">
       <section class="profile">
         <div class="profile__space">
-          <img src="./images/image.png" alt="фото профиля" class="profile__avatar">
+          <img src="<%=require('./images/image.png')%>" alt="фото профиля" class="profile__avatar">
           <div class="profile__info">
             <h1 class="profile__title">Жак-Ив Кусто</h1>
             <button class="profile__edit-button" type="button"></button>
@@ -71,13 +70,12 @@
   <template class="card-template">
     <li class="card">
       <div class="card__button">
-        <img src="./images/cap.svg">
-        <img src="./images/basket.svg">
+        <img src="<%=require('./images/cap.svg')%>">
+        <img src="<%=require('./images/basket.svg')%>">
       </div>
       <img src="#" alt="#" class="card__image">
       <div class="card__description"><h2 class="card__text"></h2><button class="card__like" type="button"></button></div>
     </li>
   </template>
-  <script src="./scripts/script.js" type="module"></script>
 </body>
 </html>

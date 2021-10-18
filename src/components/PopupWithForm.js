@@ -4,28 +4,24 @@ export default class PopupWithForm extends Popup {
   constructor(popupSelector, formSubmit) {
     super(popupSelector);
     this._formSubmit = formSubmit;
-    this._form = document.querySelector(popupSelector).querySelector('.popup__form')
+    this._form = this._popup.querySelector('.popup__form')
+    this._inputList = this._form.querySelectorAll('.popup__input')
   }
 
   _getInputValues() {
-    return Array.from(this._form.querySelectorAll('.popup__input'))
+    this._formValues = {};
+    this._inputList.forEach(input => this._formValues[input.name] = input.value);
+
+    return this._formValues;
   }
 
   setEventListeners() {
-    this._popup.querySelector('.popup__icon').addEventListener('click', this.close.bind(this)); 
-    this._popup.addEventListener('click', (event) => { 
-      if (event.target.getAttribute("class").includes("popup_opened")) { 
-        this.close(); 
-      }; 
-    });
-    this._form.addEventListener('submit', this._formSubmit)
+    super.setEventListeners()
+    this._form.addEventListener('submit', () => {this._formSubmit(this._getInputValues())})
   }
 
   close() {
-    document.removeEventListener('keydown', this._handleEscClose);
-    this._popup.classList.remove('popup_opened');
-    this._getInputValues().forEach(input => {
-      input.value = ''
-    });
+    super.close()
+    this._form.reset()
   }
 }

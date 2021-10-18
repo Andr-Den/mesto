@@ -30,13 +30,13 @@ class Card {
     cardImage.src = this._link;
     cardImage.alt = this._name;
     this._element.querySelector('.card__text').textContent = this._name;
-    this._element.querySelector('.card__button').addEventListener('click', () => {this._handleDeleteClick(this._element)}); 
-    this._element.querySelector('.card__like').addEventListener('click', this._handleLikeClick);
 
     return this._element;
   }
 
   _setEventListeners() {
+    this._element.querySelector('.card__button').addEventListener('click', () => {this._handleDeleteClick(this._element)}); 
+    this._element.querySelector('.card__like').addEventListener('click', this._handleLikeClick);
     this._element.querySelector('.card__image').addEventListener('click', () => {
       this._handlePopupClick()
     });

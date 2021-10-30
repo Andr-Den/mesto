@@ -79,21 +79,22 @@ const cardList = new Section (
 api.fetchUserInfo()
   .then((result) => {
     userInfo.setUserInfo(result.name, result.about, result._id, result.avatar)
+    api.getInitialCards()
+      .then((result) => {
+        result.forEach((item) => {
+          const cardElement = createCard(item.link, item.name, item.likes, item._id, item.owner)
+          cardList.addItemAtEnd(cardElement);
+        })
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   })
   .catch((err) => {
     console.log(err);
   });
 
-api.getInitialCards()
-  .then((result) => {
-    result.forEach((item) => {
-      const cardElement = createCard(item.link, item.name, item.likes, item._id, item.owner)
-      cardList.addItemAtEnd(cardElement);
-    })
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+
 
 
 const addCardPopup = new PopupWithForm('.popup_type_add-card', (values) => {

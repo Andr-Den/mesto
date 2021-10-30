@@ -13,14 +13,13 @@
     <main class="content">
       <section class="profile">
         <div class="profile__space">
-          <!-- <img src="<%=require('./images/image.png')%>" alt="фото профиля" class="profile__avatar"> -->
           <div class="profile__avatar">
             <button class="profile__overlay"></button>
           </div>
           <div class="profile__info">
-            <h1 class="profile__title">Жак-Ив Кусто</h1>
+            <h1 class="profile__title"></h1>
             <button class="profile__edit-button" type="button"></button>
-            <p class="profile__subtitle">Исследователь океана</p></div>
+            <p class="profile__subtitle"></p></div>
         </div>
         <button class="profile__add-button" type="button"></button>
       </section>
@@ -38,7 +37,7 @@
                 <span class="popup__input-error input-name-error"></span>
                 <input type="text" placeholder="Род занятий" id="input-job" class="popup__input" name="input-job" minlength="2" maxlength="200" required>
                 <span class="popup__input-error input-job-error"></span>
-                <input type="submit" class="popup__submit-button" value="Сохранить" name="submit_button" disabled="">
+                <input type="submit" class="popup__submit-button" value="Сохранить" name="submit_button" id="submit-button" disabled="">
               </fieldset> 
             </form>
           </div>
@@ -53,7 +52,7 @@
               <span class="popup__input-error input-card-name-error"></span>
               <input type="url" placeholder="Ссылка на картинку" id="input-link" class="popup__input" name="input_link" required>
               <span class="popup__input-error input-link-error"></span>
-              <input type="submit" class="popup__submit-button" value="Создать" name="create_button">
+              <input type="submit" class="popup__submit-button" value="Создать" name="create_button" id="create-button">
             </fieldset>
           </form>
         </div>
@@ -68,19 +67,23 @@
         <div class="popup popup_type_confirm">
           <div class="popup__container">
             <button class="popup__icon popup__icon_profile" type="button"></button>
-            <h2 class="popup__title popup__title_confirm">Вы уверены?</h2>
-            <input type="submit" class="popup__submit-button" value="Да" name="submit_button">
+            <form class="popup__form popup__form_delete-card" name="delete_cards" novalidate>
+              <fieldset class="popup__set">
+                <h2 class="popup__title popup__title_confirm">Вы уверены?</h2>
+                <input type="submit" class="popup__submit-button" value="Да" name="submit_button">
+              </fieldset>
+            </form>
           </div>
         </div>
         <div class="popup popup_type_update-avatar">
           <div class="popup__container">
-            <button class="popup__icon popup__icon_add-card" type="button"></button>
-            <form class="popup__form popup__form_add-card" name="add_cards" novalidate>
+            <button class="popup__icon popup__icon_update-avatar" type="button"></button>
+            <form class="popup__form popup__form_update-avatar" name="update-avatar" novalidate>
               <fieldset class="popup__set">
                 <h2 class="popup__title">Обновить аватар</h2>
-                <input type="url" placeholder="Ссылка на картинку" id="input-link" class="popup__input" name="input_link" required>
-                <span class="popup__input-error input-link-error"></span>
-                <input type="submit" class="popup__submit-button" value="Сохранить" name="create_button">
+                <input type="url" placeholder="Ссылка на картинку" id="input-avatar" class="popup__input" name="input-avatar" required>
+                <span class="popup__input-error input-avatar-error"></span>
+                <input type="submit" class="popup__submit-button" value="Сохранить" name="update_button" id="update-button">
               </fieldset>
             </form>
           </div>

@@ -19,52 +19,50 @@ const addCardPopupElement = document.querySelector('.popup_type_add-card');
 const openAddCardPopupButton = document.querySelector('.profile__add-button');
 const elementsList = document.querySelector('.elements__list');
 const openAvatarPopupButton = document.querySelector('.profile__overlay');
-const loadingSubmit = document.getElementById('submit-button');
-const loadingCreate = document.getElementById('create-button');
-const loadingUpdate = document.getElementById('update-button');
 
-function renderLoading(isLoading) {
-  if (isLoading) {
-    loadingSubmit.value = 'Сохранение...'
-    loadingCreate.value = 'Сохранение...'
-    loadingUpdate.value = 'Сохранение...'
-  }
-  else {
-    loadingSubmit.value = 'Сохранить'
-    loadingCreate.value = 'Создать'
-    loadingUpdate.value = 'Сохранить'
-  }
-};
-
-export const userInfo = new UserInfo({nameSelector: '.profile__title', jobSelector: '.profile__subtitle', avatarSelector: '.profile__avatar'})
+const userInfo = new UserInfo({nameSelector: '.profile__title', jobSelector: '.profile__subtitle', avatarSelector: '.profile__avatar'})
 
 const profileInfoPopup = new PopupWithForm('.popup_type_profile', (values) => {
-  renderLoading(true);
+  profileInfoPopup.renderLoading(true);
   api.editUserInfo(values["input-name"], values["input-job"])
     .then((result) => {
       userInfo.setUserInfo(result.name, result.about, result._id, result.avatar)
+      profileInfoPopup.close();
     })
     .catch((err) => {
       console.log(err);
     })
     .finally(() => {
-      renderLoading(false);
-      profileInfoPopup.close();
+      profileInfoPopup.renderLoading(false, "Сохранить");
     });
 });
 
-const createCard  = (link, name, likes, id, owner) => {
-  const card = new Card(link, name, '.card-template', () => { imagePopup.open(link, name) }, likes, id, owner)
-  return card.generateCard();
-}
-
-export const api = new Api({
+const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-29',
   headers: {
     authorization: 'a9ff0c53-5bfa-4560-ac1a-cab5954bddf5',
     'Content-Type': 'application/json'
   }
-}); 
+});
+
+const createCard  = (link, name, likes, id, owner) => {
+  const card = new Card(
+    link,
+    name,
+    '.card-template',
+    () => { imagePopup.open(link, name) },
+    likes,
+    id,
+    owner,
+    (id) => { deleteCardPopup.open(id) },
+    userInfo._id,
+    (id) => { return api.likeCard(id) },
+    (id) => { return api.dislikeCard(id) },
+  )
+  return card.generateCard();
+}
+
+
 const cardList = new Section (
   {
     items: [],
@@ -94,38 +92,35 @@ api.fetchUserInfo()
     console.log(err);
   });
 
-
-
-
 const addCardPopup = new PopupWithForm('.popup_type_add-card', (values) => {
-  renderLoading(true);
+  addCardPopup.renderLoading(true);
   api.createCard(values.input_card_name, values.input_link)
     .then((item) => {
       const cardElement = createCard(item.link, item.name, item.likes, item._id, item.owner)
       cardList.addItem(cardElement);
+      addCardPopup.close();
     })
     .catch((err) => {
       console.log(err);
     })
     .finally(() => {
-      renderLoading(false);
-      addCardPopup.close(); 
+      addCardPopup.renderLoading(false, "Создать"); 
     });
 });
 const imagePopup = new PopupWithImage('.popup_type_open-cards');
 
 const avatarPopup = new PopupWithForm('.popup_type_update-avatar', (values) => {
-  renderLoading(true);
+  avatarPopup.renderLoading(true);
   api.editAvatar(values["input-avatar"])
     .then((result) => {
       userInfo.setUserInfo(result.name, result.about, result._id, result.avatar)
+      avatarPopup.close();
     })
     .catch((err) => {
       console.log(err);
     })
     .finally(() => {
-      renderLoading(false);
-      avatarPopup.close();
+      avatarPopup.renderLoading(false, "Сохранить");
     });
   
 });
@@ -134,7 +129,7 @@ const avatarPopupElement = document.querySelector('.popup_type_update-avatar');
 const avatarValidator = new FormValidator(validationObject, avatarPopupElement.querySelector(validationObject.formSelector))
 avatarValidator.enableValidation()
 
-export const deleteCardPopup = new PopupWithDeleteButton('.popup_type_confirm', (id) => {
+const deleteCardPopup = new PopupWithDeleteButton('.popup_type_confirm', (id) => {
   api.deleteCard(id)
     .then(() => {
       document.getElementById(id).remove()
@@ -169,6 +164,7 @@ openAddCardPopupButton.addEventListener('click', () => {
 });
 
 openAvatarPopupButton.addEventListener('click', () => {
+  avatarValidator.resetValidation()
   avatarPopup.open(); 
 });
 

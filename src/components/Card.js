@@ -1,6 +1,6 @@
-import { api, deleteCardPopup, userInfo } from '../pages/index.js'
+import { api, userInfo } from '../pages/index.js'
 class Card {
-  constructor(link, name, templateClass, handlePopupClick, likes, id, owner) {
+  constructor(link, name, templateClass, handlePopupClick, likes, id, owner, openDeleteCardPopup, myId, likeCallback, dislikeCallback) {
     this._link = link;
     this._name = name;
     this._templateClass = templateClass;
@@ -8,6 +8,10 @@ class Card {
     this._likes = likes;
     this._id = id;
     this._owner = owner;
+    this._openDeleteCardPopup = openDeleteCardPopup
+    this._myId = myId
+    this._likeCallback = likeCallback
+    this._dislikeCallback = dislikeCallback
   }
 
   _getTemplate() {
@@ -32,7 +36,7 @@ class Card {
   _likedCard () {
     let likedCard = false;
     for(let i = 0; i < this._likes.length; i++) {
-      if (this._likes[i]._id == userInfo._id) {
+      if (this._likes[i]._id == this._myId) {
         likedCard = true;
       }
     }
@@ -40,55 +44,58 @@ class Card {
   }
 
   _handleLikeClick (evt) {
-    evt.target.classList.add('card__like_active');
-    api.likeCard(this._id)
+    this._likeCallback(this._id)
       .then((result) => {
+        evt.target.classList.add('card__like_active');
         this._likes = result.likes
-        this._element.querySelector('.card__like-amount').textContent = result.likes.length
+        this._likeAmount.textContent = result.likes.length
       })
   }
 
   _handleDislikeClick (evt) {
-    evt.target.classList.remove('card__like_active');
-    api.dislikeCard(this._id)
+    this._dislikeCallback(this._id)
       .then((result) => {
+        evt.target.classList.remove('card__like_active');
         this._likes = result.likes
-        this._element.querySelector('.card__like-amount').textContent = result.likes.length
+        this._likeAmount.textContent = result.likes.length
       })
   }
   
   _handleDeleteClick () {
-    deleteCardPopup.open(this._id)
+    this._openDeleteCardPopup(this._id)
   }
 
   generateCard() {
     this._element = this._getTemplate();
-    this._setEventListeners();
-    const cardImage = this._element.querySelector('.card__image')
-    cardImage.src = this._link;
-    cardImage.alt = this._name;
+    this._cardImage = this._element.querySelector('.card__image')
+    this._cardImage.src = this._link;
+    this._cardImage.alt = this._name;
     this._element.querySelector('.card__text').textContent = this._name;
-    this._element.querySelector('.card__like-amount').textContent = this._likes.length;
+    this._likeAmount = this._element.querySelector('.card__like-amount')
+    this._likeAmount.textContent = this._likes.length;
+    this._likeButton = this._element.querySelector('.card__like')
+    this._deleteButton  = this._element.querySelector('.card__button')
     this._element.id = this._id
+    this._setEventListeners();
     if (this._likedCard()) {
-      this._element.querySelector('.card__like').classList.add('card__like_active')
+      this._likeButton.classList.add('card__like_active')
     }
 
     if (!this._isMyCard()) {
-      this._element.querySelector('.card__button').remove()
+      this._deleteButton.remove()
     }
 
     return this._element;
   }
 
   _isMyCard() {
-    return this._owner._id == userInfo._id
+    return this._owner._id == this._myId
   }
 
   _setEventListeners() {
-    this._element.querySelector('.card__button').addEventListener('click', () => {this._handleDeleteClick()}); 
-    this._element.querySelector('.card__like').addEventListener('click', this._handleToggleLikeClick.bind(this));
-    this._element.querySelector('.card__image').addEventListener('click', () => {
+    this._deleteButton.addEventListener('click', () => {this._handleDeleteClick()}); 
+    this._likeButton.addEventListener('click', this._handleToggleLikeClick.bind(this));
+    this._cardImage.addEventListener('click', () => {
       this._handlePopupClick()
     });
   }

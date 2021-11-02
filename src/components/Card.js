@@ -50,6 +50,9 @@ class Card {
         this._likes = result.likes
         this._likeAmount.textContent = result.likes.length
       })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   _handleDislikeClick (evt) {
@@ -59,6 +62,9 @@ class Card {
         this._likes = result.likes
         this._likeAmount.textContent = result.likes.length
       })
+      .catch((err) => {
+        console.log(err);
+      });
   }
   
   _handleDeleteClick () {
